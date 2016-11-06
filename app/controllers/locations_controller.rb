@@ -1,6 +1,12 @@
 class LocationsController < ApplicationController
   def create
-    render json: {
-    }
+    if ::Locations::Creator.new(
+      params["location"],
+      current_user
+    ).call
+      render json: {}
+    else
+      render json: {}, status: 401
+    end
   end
 end
