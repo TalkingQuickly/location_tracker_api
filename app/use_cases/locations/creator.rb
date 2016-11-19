@@ -26,6 +26,9 @@ module Locations
           loc.geonames_city
         )
         loc.save
+        VisitedCities::CheckOrCreator.new(
+          current_user, loc
+        ).call
       end
     end
 
