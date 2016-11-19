@@ -10,19 +10,107 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106104324) do
+ActiveRecord::Schema.define(version: 20161119192241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "geonames_alternate_names", force: :cascade do |t|
+    t.integer  "alternate_name_id"
+    t.integer  "geonameid"
+    t.string   "isolanguage"
+    t.string   "alternate_name"
+    t.boolean  "is_preferred_name"
+    t.boolean  "is_short_name"
+    t.boolean  "is_colloquial"
+    t.boolean  "is_historic"
+    t.string   "alternate_name_first_letters"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["alternate_name_first_letters"], name: "index_geonames_alternate_names_on_alternate_name_first_letters", using: :btree
+    t.index ["alternate_name_id"], name: "index_geonames_alternate_names_on_alternate_name_id", using: :btree
+    t.index ["geonameid"], name: "index_geonames_alternate_names_on_geonameid", using: :btree
+    t.index ["isolanguage"], name: "index_geonames_alternate_names_on_isolanguage", using: :btree
+  end
+
+  create_table "geonames_countries", force: :cascade do |t|
+    t.string   "iso"
+    t.string   "iso3"
+    t.string   "iso_numeric"
+    t.string   "fips"
+    t.string   "country"
+    t.string   "capital"
+    t.integer  "area"
+    t.integer  "population"
+    t.string   "continent"
+    t.string   "tld"
+    t.string   "currency_code"
+    t.string   "currency_name"
+    t.string   "phone"
+    t.string   "postal_code_format"
+    t.string   "postal_code_regex"
+    t.string   "languages"
+    t.integer  "geonameid"
+    t.string   "neighbours"
+    t.string   "equivalent_fips_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["geonameid"], name: "index_geonames_countries_on_geonameid", using: :btree
+  end
+
+  create_table "geonames_features", force: :cascade do |t|
+    t.integer  "geonameid"
+    t.string   "name"
+    t.string   "asciiname"
+    t.text     "alternatenames"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "feature_class"
+    t.string   "feature_code"
+    t.string   "country_code"
+    t.string   "cc2"
+    t.string   "admin1_code"
+    t.string   "admin2_code"
+    t.string   "admin3_code"
+    t.string   "admin4_code"
+    t.integer  "population"
+    t.integer  "elevation"
+    t.integer  "dem"
+    t.string   "timezone"
+    t.datetime "modification"
+    t.string   "type"
+    t.string   "asciiname_first_letters"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["admin1_code"], name: "index_geonames_features_on_admin1_code", using: :btree
+    t.index ["asciiname"], name: "index_geonames_features_on_asciiname", using: :btree
+    t.index ["asciiname_first_letters"], name: "index_geonames_features_on_asciiname_first_letters", using: :btree
+    t.index ["country_code"], name: "index_geonames_features_on_country_code", using: :btree
+    t.index ["geonameid"], name: "index_geonames_features_on_geonameid", using: :btree
+    t.index ["name"], name: "index_geonames_features_on_name", using: :btree
+    t.index ["population"], name: "index_geonames_features_on_population", using: :btree
+    t.index ["type"], name: "index_geonames_features_on_type", using: :btree
+  end
+
+  create_table "geonames_iso_languagecodes", force: :cascade do |t|
+    t.string   "iso_639_3"
+    t.string   "iso_639_2"
+    t.string   "iso_639_1"
+    t.string   "language_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.json     "raw"
     t.float    "lat"
     t.datetime "timestamp"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.float    "lng"
     t.integer  "user_id"
+    t.integer  "geonames_city_id"
+    t.integer  "geonames_country_id"
   end
 
   create_table "users", force: :cascade do |t|

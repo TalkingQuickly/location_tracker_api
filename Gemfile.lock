@@ -33,6 +33,7 @@ GEM
       activemodel (= 5.0.0.1)
       activesupport (= 5.0.0.1)
       arel (~> 7.0)
+    activerecord-reset-pk-sequence (0.2.1)
     activesupport (5.0.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -45,6 +46,11 @@ GEM
     concurrent-ruby (1.0.2)
     erubis (2.7.0)
     ffi (1.9.14)
+    geocoder (1.3.1)
+    geonames_dump (0.0.7)
+      activerecord-reset-pk-sequence
+      ruby-progressbar
+      rubyzip (> 1.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -102,6 +108,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    ruby-progressbar (1.8.1)
+    rubyzip (1.2.0)
     slop (3.6.0)
     spring (2.0.0)
       activesupport (>= 4.2)
@@ -128,6 +136,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  geocoder
+  geonames_dump
   listen (~> 3.0.5)
   pg (~> 0.18)
   pry-rails
