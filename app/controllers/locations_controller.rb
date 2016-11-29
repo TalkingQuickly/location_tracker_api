@@ -15,7 +15,7 @@ class LocationsController < ApplicationController
       data: current_user
         .locations
         .order(created_at: 'desc')
-        .limit(100).collect do |location|
+        .limit(1000).collect do |location|
         {
           title: location.id,
           timestamp: location.timestamp,
