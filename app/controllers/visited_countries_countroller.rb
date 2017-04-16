@@ -1,4 +1,4 @@
-class VisitedCitiesController < ApplicationController
+class VisitedCountriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -8,7 +8,7 @@ class VisitedCitiesController < ApplicationController
   end
 
   def cities
-    current_user.visited_cities.order('arrived DESC').first(10).collect do |city|
+    current_user.visited_countries.order('arrived DESC').first(10).collect do |city|
       {
         id: city.id,
         name: city.geonames_city.name,

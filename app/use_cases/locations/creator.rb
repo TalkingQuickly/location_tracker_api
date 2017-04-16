@@ -13,20 +13,23 @@ module Locations
       return false unless current_user
       locations.each do |location|
         loc = current_user.locations.create({
-          lat: location["coords"]["latitude"],
-          lng: location["coords"]["longitude"],
-          timestamp: location["timestamp"],
+          lat: location["latitude"],
+          lng: location["longitude"],
+          timestamp: location["time"],
           raw: location
         })
         loc.geonames_city = city_from_lat_lng(
-          location["coords"]["latitude"],
-          location["coords"]["longitude"]
+          location["latitude"],
+          location["longitude"]
         )
         loc.geonames_country = country_from_city(
           loc.geonames_city
         )
         loc.save
         VisitedCities::CheckOrCreator.new(
+          current_user, loc
+        ).call
+        VisitedCountries::CheckOrCreator.new(
           current_user, loc
         ).call
       end
