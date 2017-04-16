@@ -10,9 +10,9 @@ class VisitedCountriesController < ApplicationController
       {
         id: country.id,
         name: country.geonames_country.country,
-        arrived: country.arrived,
-        departed: country.departed,
-        duration: duration(country.arrived, country.departed)
+        arrived: country.arrived.strftime('%d/%m/%Y'),
+        departed: country.departed&.strftime('%d/%m/%Y') || "Present",
+        duration: '%.0f' % (duration(country.arrived, country.departed) /60.0/60/24)
       }
     end
   end
