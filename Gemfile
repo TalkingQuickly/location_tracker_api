@@ -39,3 +39,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'geonames_dump'
 gem 'geocoder'
+gem 'devise'
