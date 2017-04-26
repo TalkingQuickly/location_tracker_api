@@ -1,24 +1,23 @@
-# README
+# Travel Tracker API Server
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an example API implementation for the React Native & React Web
+GPS tracker application available at
+<https://github.com/TalkingQuickly/location_tracker_app>.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+1. Clone the repository
+2. Perform standard Rails application setup (database configuration etc)
+3. run `bundle exec rake geonames_dump:import:cities`
+4. run `rake geonames_dump:import:countries`
+5. Fire up a Rails console and create a new user:
 
-* System dependencies
+```
+User.create(email: 'user@example.org', password: 'somepassword', password_confirmation: 'somepassword')
+```
 
-* Configuration
+6. Start a server `bundle exec rails server`
 
-* Database creation
+You're now ready to fire up the client application from
+<https://github.com/TalkingQuickly/location_tracker_app>
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
