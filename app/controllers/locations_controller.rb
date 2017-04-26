@@ -12,8 +12,7 @@ class LocationsController < ApplicationController
 
   def index
     render json: {
-      data: current_user
-        .locations
+      data: visit_locations_getter
         .order(created_at: 'desc')
         .limit(1000).collect do |location|
         {
@@ -24,5 +23,15 @@ class LocationsController < ApplicationController
         }
       end
     }
+  end
+
+  private
+
+  def visit_locations_getter
+    @visit_locations_getter ||=
+      ::VisitedCountries::VisitLocationsGetter.new(
+        current_user,
+        params["visit_id"]
+      ).call
   end
 end
