@@ -32,7 +32,7 @@ module Locations
     end
 
     def country_from_city(city)
-      return unless city.country_code
+      return unless city
       GeonamesCountry.by_iso(city.country_code).first
     end
   end
