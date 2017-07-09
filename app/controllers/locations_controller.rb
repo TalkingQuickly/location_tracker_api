@@ -13,8 +13,9 @@ class LocationsController < ApplicationController
   def index
     render json: {
       data: visit_locations_getter
-        .order(created_at: 'desc')
-        .limit(1000).collect do |location|
+        .where('created_at >= ?', Time.now - 24.hours)
+        .order(created_at: 'asc')
+        .collect do |location|
         {
           title: location.id,
           timestamp: location.timestamp,

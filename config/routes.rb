@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :locations, only: [:create, :index]
   resources :visited_cities, only: [:index]
   resources :visited_countries, only: [:index]
+  resources :status, only: [:index]
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
 end
