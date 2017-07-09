@@ -16,8 +16,8 @@ module Locations
 
     def set_city
       location.geonames_city = city_from_lat_lng(
-        location["latitude"],
-        location["longitude"]
+        location.lat,
+        location.lng
       )
     end
 
