@@ -6,6 +6,7 @@ module VisitedCountries
     end
 
     def call
+      return unless location.geonames_country
       if user.visited_countries.empty?
         return create_visited_country
       else
