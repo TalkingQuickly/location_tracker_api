@@ -18,14 +18,8 @@ module Locations
           timestamp: location["time"],
           raw: location
         })
-        loc.geonames_city = city_from_lat_lng(
-          location["latitude"],
-          location["longitude"]
-        )
-        loc.geonames_country = country_from_city(
-          loc.geonames_city
-        )
-        loc.save
+        Tagger.new(location).call
+        loc = loc.reload
         VisitedCities::CheckOrCreator.new(
           current_user, loc
         ).call
@@ -39,12 +33,5 @@ module Locations
 
     attr_reader :locations, :current_user
 
-    def city_from_lat_lng(lat,lng)
-      GeonamesCity.near([lat, lng], 20).first
-    end
-
-    def country_from_city(city)
-      GeonamesCountry.by_iso(city.country_code).first
-    end
   end
 end
